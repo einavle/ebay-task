@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  prometheus-client:
+    build: .
+  prometheus:
+    image: "prom/prometheus"
+    ports:
+      - "9090:9090"
+    volumes:
+      - /Users/i515295/ebay/prometheus.yml:/etc/prometheus/prometheus.yml

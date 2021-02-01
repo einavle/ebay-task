@@ -1,4 +1,4 @@
-## Prerequizits
+## Prerequisites
 - docker installation 
 - docker compose installation
 - curl installation

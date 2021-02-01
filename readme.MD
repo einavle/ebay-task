@@ -8,3 +8,6 @@
 
 ##Monitoring
 - brows to http://localhost:3000
+
+##Undeploy
+- run destroy.sh

@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Summary
+from prometheus_client import start_http_server, Summary,Counter, Gauge
 import random
 import time
 
@@ -17,3 +17,12 @@ if __name__ == '__main__':
     # Generate some requests.
     while True:
         process_request(random.random())
+
+        c = Counter('einav_failures', 'Description of counter')
+        c.inc()     # Increment by 1
+        c.inc(1.6)  # Increment by given value
+
+        g = Gauge('einav_inprogress_requests', 'Description of gauge')
+        g.inc()      # Increment by 1
+        g.dec(10)    # Decrement by given value
+        g.set(4.2)   # Set to a given value

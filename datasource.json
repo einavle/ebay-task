@@ -1,0 +1,6 @@
+{
+"name":"einav-prometheus-ds",
+"type":"prometheus",
+"url":"http://einav-prometheus:9090",
+"access":"proxy"
+}

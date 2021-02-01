@@ -1,13 +1,13 @@
-##Prerequizits
+## Prerequizits
 - docker installation 
 - docker compose installation
 - curl installation
  
- ##Deployment
+ ## Deployment
 - run deploy.sh
 
-##Monitoring
+## Monitoring
 - brows to http://localhost:3000
 
-##Undeploy
+## Undeploy
 - run destroy.sh

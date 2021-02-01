@@ -4,11 +4,16 @@ import time
 
 # Create a metric to track time spent and requests made.
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+COUNT = Counter('einav_failures', 'Description of counter')
+GAUGE = Gauge('einav_inprogress_requests', 'Description of gauge')
 
 # Decorate function with metric.
 @REQUEST_TIME.time()
+
+
 def process_request(t):
-    """A dummy function that takes some time."""
+    COUNT.inc()     # Increment by 1
+    GAUGE.inc()
     time.sleep(t)
 
 if __name__ == '__main__':
@@ -17,12 +22,3 @@ if __name__ == '__main__':
     # Generate some requests.
     while True:
         process_request(random.random())
-
-        c = Counter('einav_failures', 'Description of counter')
-        c.inc()     # Increment by 1
-        c.inc(1.6)  # Increment by given value
-
-        g = Gauge('einav_inprogress_requests', 'Description of gauge')
-        g.inc()      # Increment by 1
-        g.dec(10)    # Decrement by given value
-        g.set(4.2)   # Set to a given value

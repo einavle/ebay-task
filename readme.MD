@@ -1,3 +1,10 @@
-docker run -d --rm -p 9090:9090 -v /Users/i515295/ebay/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
-    
-    
+##Prerequizits
+- docker installation 
+- docker compose installation
+- curl installation
+ 
+ ##Deployment
+- run deploy.sh
+
+##Monitoring
+- brows to http://localhost:3000

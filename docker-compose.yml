@@ -1,17 +1,15 @@
 version: "3.9"
 services:
   prometheus-client:
-    build: .
+    build: ./client
     hostname: einav-prometheus-client
     ports:
     - "8000:8000"
   prometheus:
-    image: "prom/prometheus"
+    build: ./server
     hostname: einav-prometheus
     ports:
       - "9090:9090"
-    volumes:
-      - /Users/i515295/ebay/prometheus.yml:/etc/prometheus/prometheus.yml
   grafana:
     image: "grafana/grafana"
     ports:

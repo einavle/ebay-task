@@ -1,0 +1,5 @@
+
+nameSpace: einav-ns
+grafanaPort: 3000
+prometheusPort: 9090
+prometheusHostName: "einav-prometheus"

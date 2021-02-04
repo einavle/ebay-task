@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{.Values.prometheusHostName}}"
+  namespace: "{{.Values.nameSpace}}"
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{.Values.prometheusPort}}
+      targetPort: {{.Values.prometheusPort}}
+  selector:
+    app: prometheus
+

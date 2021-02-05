@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-client
+  namespace: "{{.Values.nameSpace}}"
+  labels:
+    app: prometheus-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-client
+  template:
+    metadata:
+      labels:
+        app: prometheus-client
+    spec:
+      containers:
+        - image: einavl/prom-cli:{{.Values.prometheuaClientVer}}
+          name: prometheus-client
+          ports:
+            - containerPort: {{.Values.prometheusPort}}
+

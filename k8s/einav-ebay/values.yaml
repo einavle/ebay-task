@@ -2,4 +2,7 @@
 nameSpace: einav-ns
 grafanaPort: 3000
 prometheusPort: 9090
+prometheusClientPort: 8000
 prometheusHostName: "einav-prometheus"
+prometheusClientHostName: "einav-prometheus-client"
+prometheuaClientVer: "1.0.0"

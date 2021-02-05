@@ -16,7 +16,7 @@ spec:
         app: prometheus
     spec:
       containers:
-        - image: prom/prometheus
+        - image: einavl/prom-srv:{{.Values.prometheuaServerVer}}
           name: prometheus
           ports:
             - containerPort: {{.Values.prometheusPort}}

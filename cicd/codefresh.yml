@@ -1,0 +1,72 @@
+# More examples of Codefresh YAML can be found at
+# https://codefresh.io/docs/docs/yaml-examples/examples/
+
+version: "1.0"
+# Stages can help you organize your steps in stages
+stages:
+  - "clone"
+  - "build"
+  - "test"
+
+steps:
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "einavle/ebay-task"
+    # CF_BRANCH value is auto set when pipeline is triggered
+    # Learn more at codefresh.io/docs/docs/codefresh-yaml/variables/
+    revision: "${{CF_BRANCH}}"
+    git: "github"
+    stage: "clone"
+
+  build-docker-images:
+    type: parallel
+    steps:
+      build-prom-cli:
+        title: "Building prom-cli image"
+        type: "build"
+        image_name: "einavl/prom-cli"
+        working_directory: "${{clone}}/client"
+        tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+        dockerfile: "Dockerfile"
+        stage: "build"
+
+      build-prom-srv:
+        title: "Building prom-srv image"
+        type: "build"
+        image_name: "einavl/prom-srv"
+        working_directory: "${{clone}}/server"
+        tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+        dockerfile: "Dockerfile"
+        stage: "build"
+
+  sync_ebay-k8s-deployment:
+    title: Sync ArgoCD app and wait
+    type: argocd-sync
+    arguments:
+      context: argocd
+      app_name: ebay
+
+  post-deploy:
+    title: upload ds and dashboards to grafana
+    type: freestyle
+    working_directory: "${{clone}}"
+    arguments:
+      image: 'ubuntu'
+      commands:
+        -  apt-get update -y
+        -  apt-get install curl -y
+        - echo "Deploying datasource..."
+        - ./upload-ds.sh
+        - echo "Deploying deshboards..."
+        - ./upload-panel.sh
+
+  test:
+    title: "Running test"
+    type: "freestyle" # Run any command
+    image: "ubuntu:latest" # The image in which command will be executed
+    working_directory: "${{clone}}" # Running command where code cloned
+    commands:
+      - "ls"
+    stage: "test"
+

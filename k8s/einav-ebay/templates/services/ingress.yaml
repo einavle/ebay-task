@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ebay-ingress
+  namespace: "{{.Values.nameSpace}}"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /grafana
+            backend:
+              serviceName: grafana
+              servicePort: {{.Values.grafanaPort}}
+          - path: /prometheus-client
+            backend:
+              serviceName: {{.Values.prometheusClientHostName}}
+              servicePort: {{.Values.prometheusClientPort}}
+          - path: /prometheus
+            backend:
+              serviceName: {{.Values.prometheusHostName}}
+              servicePort: {{.Values.prometheusPort}}

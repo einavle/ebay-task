@@ -4,7 +4,7 @@ metadata:
   name: grafana
   namespace: "{{.Values.nameSpace}}"
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: "grafana-service"
       port: {{.Values.grafanaPort}}

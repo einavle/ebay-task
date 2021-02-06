@@ -4,7 +4,7 @@ metadata:
   name: "{{.Values.prometheusClientHostName}}"
   namespace: "{{.Values.nameSpace}}"
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: {{.Values.prometheusClientPort}}
       targetPort: {{.Values.prometheusClientPort}}
